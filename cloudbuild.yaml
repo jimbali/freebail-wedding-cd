@@ -11,6 +11,38 @@ steps:
   - 'CLOUDSDK_COMPUTE_ZONE=europe-west2-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=freebail-wedding'
 
+# Decrypt the file containing the key
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Decrypt GitHub key
+  args:
+  - kms
+  - decrypt
+  - --ciphertext-file=github/id_rsa.enc
+  - --plaintext-file=/root/.ssh/id_rsa
+  - --location=global
+  - --keyring=my-keyring
+  - --key=github-key
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
+
+# Set up git with key and domain.
+- name: 'gcr.io/cloud-builders/git'
+  id: Configure Git
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    chmod 600 /root/.ssh/id_rsa
+    cat <<EOF >/root/.ssh/config
+    Hostname github.com
+    IdentityFile /root/.ssh/id_rsa
+    EOF
+    mv github/known_hosts /root/.ssh/known_hosts
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
+
 # This step copies the applied manifest to the production branch
 # The COMMIT_SHA variable is automatically
 # replaced by Cloud Build.
@@ -31,3 +63,6 @@ steps:
     $(git log --format=%B -n 1 $COMMIT_SHA)" && \
     # Push the changes back to Cloud Source Repository
     git push origin production
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
