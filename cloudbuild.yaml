@@ -43,6 +43,21 @@ steps:
   - name: 'ssh'
     path: /root/.ssh
 
+# This step clones the freebail-wedding-cd repository
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Clone CD repository
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+    git clone git@github.com:jimbali/freebail-wedding-cd.git && \
+    cd freebail-wedding-cd && \
+    git checkout candidate && \
+    git config user.email ${PROJECT_ID}@cloudbuild.gserviceaccount.com
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
+
 # This step copies the applied manifest to the production branch
 # The COMMIT_SHA variable is automatically
 # replaced by Cloud Build.
@@ -53,6 +68,7 @@ steps:
   - '-c'
   - |
     set -x && \
+    cd freebail-wedding-cd && \
     # Configure Git to create commits with Cloud Build's service account
     git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)') && \
     # Switch to the production branch and copy the kubernetes.yaml file from the candidate branch
