@@ -7,6 +7,8 @@ steps:
   - 'apply'
   - '-f'
   - 'k8s/frontend/deployment.yaml'
+  - '-f'
+  - 'k8s/api/deployment.yaml'
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=europe-west2-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=freebail-wedding'
