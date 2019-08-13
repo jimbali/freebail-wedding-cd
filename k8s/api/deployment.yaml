@@ -23,7 +23,7 @@ spec:
         app: freebail-wedding-api
     spec:
       containers:
-      - image: gcr.io/freebail-wedding/freebail-wedding-api:1535adf
+      - image: gcr.io/freebail-wedding/freebail-wedding-api:5527ffa
         name: freebail-wedding-api
         resources: {}
         terminationMessagePath: /dev/termination-log
