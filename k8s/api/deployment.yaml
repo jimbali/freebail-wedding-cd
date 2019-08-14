@@ -36,11 +36,11 @@ spec:
                 secretKeyRef:
                   name: rails-master-key
                   key: key
-          image: gcr.io/freebail-wedding/freebail-wedding-api:2961bf8
+          image: gcr.io/freebail-wedding/freebail-wedding-api:f31429b
           name: freebail-wedding-api
           readinessProbe:
             httpGet:
-              path: /health
+              path: /api/health
               port: 80
           resources: {}
           terminationMessagePath: /dev/termination-log
