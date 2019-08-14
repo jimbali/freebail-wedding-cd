@@ -31,7 +31,7 @@ spec:
                   key: url
             - name: RACK_ENV
               value: production
-          image: gcr.io/freebail-wedding/freebail-wedding-api:2e7d321
+          image: gcr.io/freebail-wedding/freebail-wedding-api:ef711c8
           name: freebail-wedding-api
           readinessProbe:
             httpGet:
