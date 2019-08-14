@@ -31,7 +31,12 @@ spec:
                   key: url
             - name: RACK_ENV
               value: production
-          image: gcr.io/freebail-wedding/freebail-wedding-api:ef711c8
+            - name: RAILS_MASTER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: rails-master-key
+                  key: key
+          image: gcr.io/freebail-wedding/freebail-wedding-api:008c547
           name: freebail-wedding-api
           readinessProbe:
             httpGet:
