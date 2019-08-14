@@ -36,7 +36,7 @@ spec:
                 secretKeyRef:
                   name: rails-master-key
                   key: key
-          image: gcr.io/freebail-wedding/freebail-wedding-api:008c547
+          image: gcr.io/freebail-wedding/freebail-wedding-api:2961bf8
           name: freebail-wedding-api
           readinessProbe:
             httpGet:
@@ -48,7 +48,7 @@ spec:
         - command:
             - /cloud_sql_proxy
             - -instances=freebail-wedding:europe-west2:freebail-wedding=tcp:5432
-            - -credential_file=/secrets/cloudsql/credentials.json"
+            - -credential_file=/secrets/cloudsql/credentials.json
           image: gcr.io/cloudsql-docker/gce-proxy:1.14
           name: cloudsql-proxy
           securityContext:
