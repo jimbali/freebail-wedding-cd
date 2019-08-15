@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"freebail-frontend","namespace":"default"},"spec":{"ports":[{"port":8080,"protocol":"TCP","targetPort":80}],"selector":{"run":"freebail-frontend"},"type":"NodePort"}}
+  creationTimestamp: 2019-08-04T11:33:39Z
+  name: freebail-frontend
+  namespace: default
+  resourceVersion: "25578"
+  selfLink: /api/v1/namespaces/default/services/freebail-frontend
+  uid: b4ae25f5-b6ab-11e9-b296-42010a9a01fd
+spec:
+  clusterIP: 10.15.243.83
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 31961
+    port: 8080
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: freebail-frontend
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}

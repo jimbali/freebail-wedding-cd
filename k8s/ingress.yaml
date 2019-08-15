@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/backends: '{"k8s-be-31462--63fc77c12593b065":"HEALTHY","k8s-be-31961--63fc77c12593b065":"HEALTHY"}'
+    ingress.kubernetes.io/forwarding-rule: k8s-fw-default-freebail-wedding-ingress--63fc77c12593b065
+    ingress.kubernetes.io/https-forwarding-rule: k8s-fws-default-freebail-wedding-ingress--63fc77c12593b065
+    ingress.kubernetes.io/https-target-proxy: k8s-tps-default-freebail-wedding-ingress--63fc77c12593b065
+    ingress.kubernetes.io/ssl-cert: k8s-ssl-7ad6677ea7f5ad30-814cc2e827f9ab1c--63fc77c12593b065
+    ingress.kubernetes.io/target-proxy: k8s-tp-default-freebail-wedding-ingress--63fc77c12593b065
+    ingress.kubernetes.io/url-map: k8s-um-default-freebail-wedding-ingress--63fc77c12593b065
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"extensions/v1beta1","kind":"Ingress","metadata":{"annotations":{"kubernetes.io/ingress.global-static-ip-name":"freebail-wedding"},"creationTimestamp":"2019-08-04T11:37:51Z","generation":7,"name":"freebail-wedding-ingress","namespace":"default"},"spec":{"backend":{"serviceName":"freebail-frontend","servicePort":8080},"rules":[{"host":"freebail.wedding","http":{"paths":[{"backend":{"serviceName":"freebail-frontend","servicePort":8080},"path":"/*"},{"backend":{"serviceName":"freebail-wedding-api","servicePort":3000},"path":"/api/*"}]}}],"tls":[{"hosts":["freebail.wedding"],"secretName":"freebail-tls"}]},"status":{"loadBalancer":{"ingress":[{"ip":"35.190.39.91"}]}}}
+    kubernetes.io/ingress.global-static-ip-name: freebail-wedding
+  creationTimestamp: 2019-08-14T13:42:21Z
+  generation: 1
+  name: freebail-wedding-ingress
+  namespace: default
+  resourceVersion: "2479855"
+  selfLink: /apis/extensions/v1beta1/namespaces/default/ingresses/freebail-wedding-ingress
+  uid: 573da216-be99-11e9-8e0d-42010a9a023b
+spec:
+  backend:
+    serviceName: freebail-frontend
+    servicePort: 8080
+  rules:
+  - host: freebail.wedding
+    http:
+      paths:
+      - backend:
+          serviceName: freebail-frontend
+          servicePort: 8080
+        path: /*
+      - backend:
+          serviceName: freebail-wedding-api
+          servicePort: 3000
+        path: /api/*
+  tls:
+  - hosts:
+    - freebail.wedding
+    secretName: freebail-tls
+status:
+  loadBalancer:
+    ingress:
+    - ip: 35.190.39.91

@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"freebail-wedding-api","namespace":"default"},"spec":{"ports":[{"port":3000,"protocol":"TCP","targetPort":3000}],"selector":{"app":"freebail-wedding-api"},"type":"NodePort"}}
+  creationTimestamp: 2019-08-12T21:17:57Z
+  name: freebail-wedding-api
+  namespace: default
+  resourceVersion: "2064712"
+  selfLink: /api/v1/namespaces/default/services/freebail-wedding-api
+  uid: a7d06821-bd46-11e9-8e0d-42010a9a023b
+spec:
+  clusterIP: 10.15.252.53
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 31462
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: freebail-wedding-api
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
