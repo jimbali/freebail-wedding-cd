@@ -36,7 +36,7 @@ spec:
                 secretKeyRef:
                   name: rails-master-key
                   key: key
-          image: gcr.io/freebail-wedding/freebail-wedding-api:2c04b60
+          image: gcr.io/freebail-wedding/freebail-wedding-api:14506d6
           name: freebail-wedding-api
           readinessProbe:
             httpGet:
