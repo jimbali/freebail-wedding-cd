@@ -23,7 +23,7 @@ spec:
         app: freebail-frontend
     spec:
       containers:
-      - image: gcr.io/freebail-wedding/freebail-frontend:fafdcd4
+      - image: gcr.io/freebail-wedding/freebail-frontend:15a0c38
         name: simple-nginx
         resources: {}
         terminationMessagePath: /dev/termination-log
