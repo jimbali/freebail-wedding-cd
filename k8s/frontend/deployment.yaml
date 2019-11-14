@@ -6,7 +6,7 @@ metadata:
   name: freebail-frontend
 spec:
   progressDeadlineSeconds: 600
-  replicas: 1
+  replicas: 2
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -23,7 +23,7 @@ spec:
         app: freebail-frontend
     spec:
       containers:
-      - image: gcr.io/freebail-wedding/freebail-frontend:98df8e9
+      - image: gcr.io/freebail-wedding/freebail-frontend:82c8a86
         name: simple-nginx
         resources: {}
         terminationMessagePath: /dev/termination-log
