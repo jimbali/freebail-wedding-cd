@@ -22,8 +22,20 @@ spec:
       labels:
         app: freebail-frontend
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                      - freebail-frontend
+                topologyKey: kubernetes.io/hostname
+              weight: 100
       containers:
-      - image: gcr.io/freebail-wedding/freebail-frontend:82c8a86
+      - image: gcr.io/freebail-wedding/freebail-frontend:0ef2fc6
         name: simple-nginx
         resources: {}
         terminationMessagePath: /dev/termination-log
