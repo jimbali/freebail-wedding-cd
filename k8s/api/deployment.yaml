@@ -22,6 +22,18 @@ spec:
       labels:
         app: freebail-wedding-api
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                      - freebail-wedding-api
+                topologyKey: kubernetes.io/hostname
+              weight: 100
       containers:
         - env:
             - name: DATABASE_URL
@@ -36,7 +48,7 @@ spec:
                 secretKeyRef:
                   name: rails-master-key
                   key: key
-          image: gcr.io/freebail-wedding/freebail-wedding-api:2fc0423
+          image: gcr.io/freebail-wedding/freebail-wedding-api:34c6170
           name: freebail-wedding-api
           ports:
             - containerPort: 3000
