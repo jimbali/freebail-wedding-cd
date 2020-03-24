@@ -35,7 +35,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       containers:
-      - image: gcr.io/freebail-wedding/freebail-frontend:a642274
+      - image: gcr.io/freebail-wedding/freebail-frontend:8cf173d
         name: simple-nginx
         resources: {}
         terminationMessagePath: /dev/termination-log
