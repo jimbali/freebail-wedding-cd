@@ -35,3 +35,17 @@ spec:
           serviceName: eagsmaster
           servicePort: 3000
         path: /*
+  - host: magicode.co.uk
+    http:
+      paths:
+      - backend:
+          serviceName: magicode
+          servicePort: 80
+        path: /*
+  - host: exttest.magicode.co.uk
+    http:
+      paths:
+      - backend:
+          serviceName: magicode
+          servicePort: 80
+        path: /*
