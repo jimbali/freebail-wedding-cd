@@ -49,3 +49,10 @@ spec:
           serviceName: magicode
           servicePort: 80
         path: /*
+  - host: astedroid-api.magicode.co.uk
+    http:
+      paths:
+      - backend:
+          serviceName: astedroid-api
+          servicePort: 3000
+        path: /*
