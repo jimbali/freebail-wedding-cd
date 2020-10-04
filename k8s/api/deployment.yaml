@@ -48,7 +48,7 @@ spec:
                 secretKeyRef:
                   name: rails-master-key
                   key: key
-          image: gcr.io/freebail-wedding/freebail-wedding-api:59583a0
+          image: gcr.io/freebail-wedding/freebail-wedding-api:d1faf9d
           name: freebail-wedding-api
           ports:
             - containerPort: 3000
