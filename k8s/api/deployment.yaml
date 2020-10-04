@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -48,7 +48,7 @@ spec:
                 secretKeyRef:
                   name: rails-master-key
                   key: key
-          image: gcr.io/freebail-wedding/freebail-wedding-api:5e83651
+          image: gcr.io/freebail-wedding/freebail-wedding-api:d1faf9d
           name: freebail-wedding-api
           ports:
             - containerPort: 3000
