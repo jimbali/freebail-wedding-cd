@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: freebail-frontend
+  name: freebail-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: freebail-frontend
+  template:
+    metadata:
+      labels:
+        app: freebail-frontend
+    spec:
+      serviceAccountName: {{ include "freebail-wedding.serviceAccountName" . }}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                      - freebail-frontend
+                topologyKey: kubernetes.io/hostname
+              weight: 100
+      containers:
+      - image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
+        name: simple-nginx

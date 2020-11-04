@@ -1,0 +1,34 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: nginx
+  name: freebail-ingress
+spec:
+  rules:
+  - host: freebail.wedding
+    http:
+      paths:
+      - backend:
+          serviceName: freebail-frontend
+          servicePort: 8080
+        path: /
+      - backend:
+          serviceName: freebail-wedding-api
+          servicePort: 3000
+        path: /api/
+  - host: admin.freebail.wedding
+    http:
+      paths:
+      - backend:
+          serviceName: phpmyadmin
+          servicePort: 8080
+        path: /
+  tls:
+  - hosts:
+    - freebail.wedding
+    - admin.freebail.wedding
+    secretName: freebail-tls
+{{- end }}

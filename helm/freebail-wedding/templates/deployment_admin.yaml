@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: phpmyadmin
+  name: phpmyadmin
+spec:
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: freebail-db-creds
+                  key: rootPw
+            - name: PMA_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: freebail-db-creds
+                  key: host
+            - name: PMA_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: freebail-db-creds
+                  key: port
+            - name: PMA_ARBITRARY
+              value: '1'
+          image: biarms/phpmyadmin:5.0.2
+          name: phpmyadmin
+          ports:
+            - containerPort: 80
+              protocol: TCP
+        - command:
+            - /cloud_sql_proxy
+            - -instances=freebail-wedding:europe-west2:freebail-wedding=tcp:5432
+            - -credential_file=/secrets/cloudsql/credentials.json
+          image: "{{ .Values.cloudSql.image.repository }}:{{ .Values.cloudSql.image.tag }}"
+          name: cloudsql-proxy
+          securityContext:
+            runAsUser: 2  # non-root user
+            allowPrivilegeEscalation: false
+          volumeMounts:
+            - name: freebail-cloudsql-instance-credentials
+              mountPath: /secrets/cloudsql
+              readOnly: true
+      restartPolicy: Always
+      volumes:
+        - name: freebail-cloudsql-instance-credentials
+          secret:
+            secretName: cloudsql-instance-credentials
