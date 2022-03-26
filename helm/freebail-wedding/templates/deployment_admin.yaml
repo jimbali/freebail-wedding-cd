@@ -15,6 +15,8 @@ spec:
     spec:
       containers:
         - env:
+            - name: MY_SECRET
+              value: {{ .Values.mySecret }}
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
