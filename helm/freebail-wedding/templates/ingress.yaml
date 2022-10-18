@@ -1,5 +1,5 @@
 {{- if .Values.ingress.enabled -}}
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -12,20 +12,29 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: freebail-frontend
-          servicePort: 8080
+          service:
+            name: freebail-frontend
+            port:
+              number: 8080
         path: /
+        pathType: ImplementationSpecific
       - backend:
-          serviceName: freebail-wedding-api
-          servicePort: 3000
+          service:
+            name: freebail-wedding-api
+            port:
+              number: 3000
         path: /api/
+        pathType: ImplementationSpecific
   - host: admin.freebail.wedding
     http:
       paths:
       - backend:
-          serviceName: phpmyadmin
-          servicePort: 8080
+          service:
+            name: phpmyadmin
+            port:
+              number: 8080
         path: /
+        pathType: ImplementationSpecific
   tls:
   - hosts:
     - freebail.wedding
